@@ -1,7 +1,7 @@
 
 FROM quay.io/biocontainers/mhcflurry:2.1.4--pyh7e72e81_0
 
-FROM alpine:3
+FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
