@@ -1,11 +1,13 @@
 
 FROM quay.io/biocontainers/mhcflurry:2.1.4--pyh7e72e81_0
 
+FROM alpine:3
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 RUN apt update && \
-    apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev liblzma-dev r-base curl sed wget && \
+    apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev liblzma-dev r-base curl wget && \
     apt clean;
 
 RUN R -q -e "install.packages(c('curl'))" && \
