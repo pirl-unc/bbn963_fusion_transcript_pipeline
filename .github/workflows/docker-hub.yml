@@ -1,0 +1,28 @@
+name: Build and Push bbn963 Fusion Transcript Pipeline Image to Docker Hub
+
+on: push
+jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: test docker image
+          uses: actions/checkout@v4
+    push_to_registry:
+      name: push docker image to hub
+      runs-on: ubuntu-latest
+      steps:
+        - name: check repository
+          uses: actions/checkout@v4
+
+        - name: login to docker registry
+          uses: docker/login-action@v3
+          with:
+            username: ${{secrets.DOCKER_USERNAME}}
+            password: ${{secrets.DOCKER_PASSWORD}}
+
+        - name: build and push docker image to registry
+          uses: docker/build-push-action@v5
+          with:
+            context: "{{defaultContext}}"
+            push: true
+            tags: vantwisk/bbn963-fusion-transcript-pipeline:latest
